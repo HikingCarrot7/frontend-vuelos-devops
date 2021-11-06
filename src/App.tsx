@@ -1,10 +1,10 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import { Login } from './components/auth/Login';
+import { Login } from './auth/Login';
 
 const App = () => {
   return (
     <ChakraProvider>
-      <Login></Login>
+      <Login />
     </ChakraProvider>
   );
 };
