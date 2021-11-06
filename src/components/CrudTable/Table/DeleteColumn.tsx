@@ -12,7 +12,7 @@ const DeleteColumn = ({tableProps, data, setData}) => {
         const dataCopy = [...data];
         const dataToDelete = data[tableProps.row.index];
         dataCopy.splice(tableProps.row.index, 1);
-        setData(dataCopy, dataToDelete);
+        setData(dataCopy, dataToDelete, tableProps.row.index);
       }}
     >
       Delete
