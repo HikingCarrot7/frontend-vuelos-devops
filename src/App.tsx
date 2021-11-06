@@ -15,12 +15,20 @@ const App = () => {
     console.log(data);
   };
 
+  const handleDelete = (updatedData, deletedData) => {
+    console.log('Updated after delete: ');
+    console.log(updatedData);
+    console.log('Deleted data: ');
+    console.log(deletedData);
+  };
+
   return (
     <ChakraProvider>
       <CrudTable 
         handleChange={handleUpdate}
         handleReset={handleReset}
-        customData={exampleData}  
+        customData={exampleData}
+        handleDelete={handleDelete}
       />
     </ChakraProvider>
   );

@@ -2,11 +2,21 @@ import React, { useState, useEffect } from 'react';
 import Table from './Table/Table';
 import { parseData } from '../../util/tableDataParser';
 
-const CrudTable = ({customData, handleChange, handleReset}) => {
+const CrudTable = ({customData, handleChange, handleReset, handleDelete}) => {
   const [data, setData] = useState(customData as Array<any>)
   const [originalData] = useState(data)
   const [skipPageReset, setSkipPageReset] = useState(false)
-  const [myColumns] = parseData(customData);
+  const [myColumns, setMyColumns] = useState([]);
+
+  const deleteData = (updatedData, deletedData) => {
+    const confirmDelete = window.confirm('Are you sure?');
+    if (confirmDelete) {
+      setData(updatedData);
+      handleDelete(updatedData, deletedData);
+    } else {
+      alert('Delete canceled');
+    }
+  };
   
   const updateMyData = (rowIndex: number, columnId: number, value: any) => {
     setSkipPageReset(true)
@@ -24,7 +34,8 @@ const CrudTable = ({customData, handleChange, handleReset}) => {
 
   useEffect(() => {
     setSkipPageReset(false)
-  }, [data])  
+    setMyColumns(parseData(data, deleteData));
+  }, [data])
 
   const resetData = () => {
     setData(originalData);

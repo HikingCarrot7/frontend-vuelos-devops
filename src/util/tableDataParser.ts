@@ -1,9 +1,11 @@
-export const parseData = (data: Array<any>) => {
-  const columns = createColumns(data);
-  return [columns];
+import {createDeleteColumn} from '../components/CrudTable/Table/DeleteColumn';
+
+export const parseData = (data: Array<any>, setData) => {
+  const columns = createColumns(data, setData);
+  return columns;
 };
 
-const createColumns = (data: Array<any>) => {
+const createColumns = (data: Array<any>, setData) => {
   const object = data[0];
   const columns = [];
   for (let key in object) {
@@ -12,5 +14,15 @@ const createColumns = (data: Array<any>) => {
       accessor: key,
     });
   }
+  columns.push(addDeleteColumn(data, setData));
   return columns;
+};
+
+const addDeleteColumn = (data, setData) => {
+  return {
+    Header: 'Delete',
+    id: 'delete',
+    accessor: (str) => 'delete',
+    Cell: (tableProps) => createDeleteColumn(tableProps, data, setData),
+  };
 };
