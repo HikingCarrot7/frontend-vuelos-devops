@@ -1,5 +1,4 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import { Login } from './auth/Login';
 import { exampleData } from './util/exampleData';
 import CrudTable from './components/CrudTable';
 
@@ -18,7 +17,6 @@ const App = () => {
 
   return (
     <ChakraProvider>
-      <Login />
       <CrudTable 
         handleChange={handleUpdate}
         handleReset={handleReset}

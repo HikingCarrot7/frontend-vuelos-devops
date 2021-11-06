@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { useTable, usePagination } from 'react-table';
 import { defaultColumn } from './EditableCell';
 
-function Table({ columns, data, updateMyData, skipPageReset }) {
+function DataTable({ columns, data, updateMyData, skipPageReset }) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -31,29 +32,29 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
 
   return (
     <>
-      <table {...getTableProps()}>
-        <thead>
+      <Table {...getTableProps()}>
+        <Thead>
           {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <Tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <Th {...column.getHeaderProps()}>{column.render('Header')}</Th>
               ))}
-            </tr>
+            </Tr>
           ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
+        </Thead>
+        <Tbody {...getTableBodyProps()}>
           {page.map((row, i) => {
             prepareRow(row)
             return (
-              <tr {...row.getRowProps()}>
+              <Tr {...row.getRowProps()}>
                 {row.cells.map(cell => {
-                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  return <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
                 })}
-              </tr>
+              </Tr>
             )
           })}
-        </tbody>
-      </table>
+        </Tbody>
+      </Table>
       <div className="pagination">
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
           {'<<'}
@@ -102,4 +103,4 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
   )
 }
 
-export default Table;
+export default DataTable;

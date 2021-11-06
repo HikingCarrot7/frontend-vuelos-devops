@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Table from './Table/Table';
-import { Styles } from './styles';
 import { parseData } from '../../util/tableDataParser';
 
 const CrudTable = ({customData, handleChange, handleReset}) => {
@@ -9,7 +8,7 @@ const CrudTable = ({customData, handleChange, handleReset}) => {
   const [skipPageReset, setSkipPageReset] = useState(false)
   const [myColumns] = parseData(customData);
   
-  const updateMyData = (rowIndex: number, columnId: number, value: string) => {
+  const updateMyData = (rowIndex: number, columnId: number, value: any) => {
     setSkipPageReset(true)
     const oldObject = data[rowIndex];
     const updatedObject = {...oldObject, [columnId]: value};
@@ -33,7 +32,7 @@ const CrudTable = ({customData, handleChange, handleReset}) => {
   }
 
   return (
-    <Styles>
+    <>
       <button onClick={resetData}>Reset Data</button>
       <Table
         columns={myColumns}
@@ -41,7 +40,7 @@ const CrudTable = ({customData, handleChange, handleReset}) => {
         updateMyData={updateMyData}
         skipPageReset={skipPageReset}
       />
-    </Styles>
+    </>
   );
 };
 
