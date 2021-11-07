@@ -19,13 +19,14 @@ const CrudTable = ({customData, handleChange, handleReset, handleDelete}) => {
   };
   
   const updateMyData = (rowIndex: number, columnId: string, value: any) => {
+    let dataWasUpdated = false;
     setSkipPageReset(true)
     const oldObject = data[rowIndex];
 
     const isDataUnchanged = oldObject[columnId] === value;
-    if(isDataUnchanged) return;
+    if(isDataUnchanged) return dataWasUpdated;
     const confirmUpdate = window.confirm(`Are you sure to update row ${rowIndex} at column ${columnId} from ${oldObject[columnId]} to ${value}?`);
-    if(!confirmUpdate) return;
+    if(!confirmUpdate) return dataWasUpdated;
 
     const updatedObject = {...oldObject, [columnId]: value};
     const updatedData = data.map((row: number, index: number) => {
@@ -36,6 +37,8 @@ const CrudTable = ({customData, handleChange, handleReset, handleDelete}) => {
     });
     setData(updatedData);
     handleChange(updatedData, updatedObject);
+    dataWasUpdated = true;
+    return dataWasUpdated;
   }
 
   useEffect(() => {

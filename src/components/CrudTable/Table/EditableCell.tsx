@@ -9,20 +9,43 @@ const EditableCell = ({
 }) => {
 
   const [value, setValue] = useState(initialValue)
+  const [previousValue, setPreviousValue] = useState(initialValue);
+  const [areChangesUnsaved, setAreChangesUnsaved] = useState(false);
 
   const onChange = e => {
-    setValue(e.target.value)
-  }
+    setPreviousValue(value);
+    setValue(e.target.value);
+  };
 
   const onBlur = () => {
-    updateMyData(index, id, value)
-  }
+    if (value === initialValue) {
+      setAreChangesUnsaved(false);
+      return;
+    }
+    if(previousValue !== value) {
+      setAreChangesUnsaved(true);
+    } else {
+      setAreChangesUnsaved(false);
+    }
+  };
+
+  const onKeyPress = e => {
+    if (e.key === 'Enter' && !updateMyData(index, id, value)) {
+      setValue(initialValue);    
+    }
+  };
 
   useEffect(() => {
     setValue(initialValue)
-  }, [initialValue])
+    setPreviousValue(initialValue);
+    setAreChangesUnsaved(false);
+  }, [initialValue]);
 
-  return <input value={value} onChange={onChange} onBlur={onBlur} />
+  return (
+    <>
+      {areChangesUnsaved && <span>*</span>} <input value={value} onChange={onChange} onKeyPress={onKeyPress} onBlur={onBlur} />
+    </>
+  );
 }
 
 export const defaultColumn = {
