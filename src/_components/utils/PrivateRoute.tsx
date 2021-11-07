@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router';
 import { Navigate } from 'react-router-dom';
-import { authService } from '../_services/auth.service';
+import { authService } from '../../_services/auth.service';
 
 export interface PrivateRouteProps {
   children: JSX.Element;

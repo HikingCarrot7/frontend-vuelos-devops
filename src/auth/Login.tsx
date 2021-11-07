@@ -11,7 +11,7 @@ import { Form, Formik } from 'formik';
 import React, { useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
-import { ToggablePasswordViewInput } from '_components/ToggablePasswordViewInput';
+import { ToggablePasswordViewInput } from '_components/forms/ToggablePasswordViewInput';
 import { usePrevLocation } from '_hooks/usePrevLocation';
 import { authService } from '../_services/auth.service';
 
