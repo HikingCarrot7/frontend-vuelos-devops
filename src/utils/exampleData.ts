@@ -33,5 +33,5 @@ export const exampleData = [
     age: 21,
     email: 'rafa@gmail.com',
     otherColumn: 'xd5',
-  }  
+  },
 ];

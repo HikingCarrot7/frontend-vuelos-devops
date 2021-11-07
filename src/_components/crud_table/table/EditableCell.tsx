@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import { Input } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 
 const EditableCell = ({
   value: initialValue,
   row: { index },
   column: { id },
-  updateMyData,
+  updateData,
 }) => {
   const [value, setValue] = useState(initialValue);
   const [previousValue, setPreviousValue] = useState(initialValue);
   const [areChangesUnsaved, setAreChangesUnsaved] = useState(false);
+
+  useEffect(() => {
+    setValue(initialValue);
+    setPreviousValue(initialValue);
+    setAreChangesUnsaved(false);
+  }, [initialValue]);
 
   const onChange = (e) => {
     setPreviousValue(value);
@@ -29,27 +36,18 @@ const EditableCell = ({
   };
 
   const onKeyPress = (e) => {
-    if (e.key === 'Enter' && !updateMyData(index, id, value)) {
+    if (e.key === 'Enter' && !updateData(index, id, value)) {
       setValue(initialValue);
     }
   };
 
-  useEffect(() => {
-    setValue(initialValue);
-    setPreviousValue(initialValue);
-    setAreChangesUnsaved(false);
-  }, [initialValue]);
-
   return (
-    <>
-      {areChangesUnsaved && <span>*</span>}{' '}
-      <input
-        value={value}
-        onChange={onChange}
-        onKeyPress={onKeyPress}
-        onBlur={onBlur}
-      />
-    </>
+    <Input
+      variant="light-outline"
+      borderColor={areChangesUnsaved ? 'gray.600' : 'gray.300'}
+      value={value}
+      {...{ onChange, onKeyPress, onBlur }}
+    />
   );
 };
 

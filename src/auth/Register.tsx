@@ -23,8 +23,8 @@ export interface RegisterProps {}
 const registerValidationSchema = loginValidationSchema.shape({
   username: yup
     .string()
-    .min(5, 'Se necesita un nombre de usario con al menos 5 caracteres.')
-    .max(35, 'El nombrede usuario es de un máximo de 35 caracteres.'),
+    .min(5, 'Se necesita un nombre de usuario con al menos 5 caracteres.')
+    .max(35, 'El nombre de usuario es de un máximo de 35 caracteres.'),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Las contraseñas no son iguales.'),
@@ -50,10 +50,11 @@ export const Register: React.FC<RegisterProps> = () => {
             .register(values.username, values.email, values.password)
             .then(() => {
               navigate(from);
-              setSubmitting(false);
             })
             .catch((err) => {
               window.alert(err);
+            })
+            .finally(() => {
               setSubmitting(false);
             });
         }}

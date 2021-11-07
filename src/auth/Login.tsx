@@ -50,10 +50,11 @@ export const Login: React.FC<LoginProps> = () => {
             .login(values.email, values.password)
             .then(() => {
               navigate(from);
-              setSubmitting(false);
             })
             .catch((err: any) => {
               window.alert(err);
+            })
+            .finally(() => {
               setSubmitting(false);
             });
         }}
