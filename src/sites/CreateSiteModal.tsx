@@ -1,4 +1,3 @@
-import { useDisclosure } from '@chakra-ui/hooks';
 import { Modal as ChakraModal } from '@chakra-ui/modal';
 import {
   Button,
@@ -23,19 +22,24 @@ import { FaCity } from 'react-icons/fa';
 import { GiFrance } from 'react-icons/gi';
 import { MdArrowDropDown } from 'react-icons/md';
 
-export const CreateSiteModal = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export interface CreateSiteModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
+export const CreateSiteModal: React.FC<CreateSiteModalProps> = ({
+  isOpen,
+  onClose,
+}) => {
   const initialRef = React.useRef<HTMLInputElement>(null);
 
   return (
     <>
-      <Button onClick={onOpen}>Trigger modal</Button>
       <ChakraModal
         initialFocusRef={initialRef}
         closeOnOverlayClick={false}
-        {...{ isOpen, onOpen, onClose }}
         size="2xl"
+        {...{ isOpen, onClose }}
       >
         <ModalOverlay />
         <ModalContent>

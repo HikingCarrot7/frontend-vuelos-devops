@@ -1,22 +1,17 @@
+import axios from 'axios';
 import { BehaviorSubject } from 'rxjs';
-import { handleResponse } from '../_helpers/handle_response';
-
-const requestOptions = {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-};
 
 const currentUserSubject = new BehaviorSubject(
   JSON.parse(localStorage.getItem('currentUser') || '""')
 );
 
 const login = (email: string, password: string) => {
-  return fetch('http://localhost:5000/api/v1/login', {
-    ...requestOptions,
-    body: JSON.stringify({ email, password }),
-  })
-    .then(handleResponse)
-    .then((user) => {
+  return axios
+    .post(`${process.env.REACT_APP_BASE_API_URL}/login`, {
+      email,
+      password,
+    })
+    .then(({ data: user }) => {
       localStorage.setItem('currentUser', JSON.stringify(user));
       currentUserSubject.next(user);
 
@@ -25,18 +20,19 @@ const login = (email: string, password: string) => {
 };
 
 const register = (username: string, email: string, password: string) => {
-  return fetch('http://localhost:5000/api/v1/register', {
-    ...requestOptions,
-    body: JSON.stringify({ username, email, password }),
-  })
-    .then(handleResponse)
-    .then((user) => {
-      const { username, token } = user;
+  return axios
+    .post(`${process.env.REACT_APP_BASE_API_URL}/register`, {
+      username,
+      email,
+      password,
+    })
+    .then((response) => {
+      const { username, token } = response.data;
 
       localStorage.setItem('currentUser', JSON.stringify({ username, token }));
       currentUserSubject.next({ username, token });
 
-      return user;
+      return response;
     });
 };
 
