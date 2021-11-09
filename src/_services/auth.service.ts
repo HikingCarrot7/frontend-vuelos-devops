@@ -27,9 +27,12 @@ const register = (username: string, email: string, password: string) => {
       password,
     })
     .then((response) => {
-      const { username, token } = response.data;
+      const { id, username, token } = response.data;
 
-      localStorage.setItem('currentUser', JSON.stringify({ username, token }));
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify({ id, username, token })
+      );
       currentUserSubject.next({ username, token });
 
       return response;
