@@ -21,8 +21,9 @@ import {
 } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import React from 'react';
-import { FaCity } from 'react-icons/fa';
-import { GiFrance, GiMexico } from 'react-icons/gi';
+import { FaPlane } from 'react-icons/fa';
+import { FiUsers } from 'react-icons/fi';
+import { MdOutlineClass } from 'react-icons/md';
 import { FlightTicket } from 'types/entities/FlightTicket';
 import * as yup from 'yup';
 import { authService } from '../_services/auth.service';
@@ -108,7 +109,7 @@ export const CreateFlightTicketModal: React.FC<CreateFlightTicketModalProps> = (
                     <InputGroup>
                       <InputLeftElement
                         pointerEvents="none"
-                        children={<Icon as={GiFrance} color="gray.300" />}
+                        children={<Icon as={FaPlane} color="gray.300" />}
                       />
                       <Input
                         name="flightId"
@@ -126,7 +127,7 @@ export const CreateFlightTicketModal: React.FC<CreateFlightTicketModalProps> = (
                     <InputGroup>
                       <InputLeftElement
                         pointerEvents="none"
-                        children={<Icon as={FaCity} color="gray.300" />}
+                        children={<Icon as={MdOutlineClass} color="gray.300" />}
                       />
                       <Input
                         name="flightClassId"
@@ -143,7 +144,7 @@ export const CreateFlightTicketModal: React.FC<CreateFlightTicketModalProps> = (
                     <InputGroup>
                       <InputLeftElement
                         pointerEvents="none"
-                        children={<Icon as={FaCity} color="gray.300" />}
+                        children={<Icon as={FiUsers} color="gray.300" />}
                       />
                       <Input
                         name="passengers"
@@ -161,7 +162,6 @@ export const CreateFlightTicketModal: React.FC<CreateFlightTicketModalProps> = (
                 <HStack spacing="3">
                   <Button
                     colorScheme="teal"
-                    onClick={onClose}
                     type="submit"
                     disabled={isSubmitting}
                   >

@@ -22,13 +22,20 @@ const createFlightTicket = (
 };
 
 const updateFlightTicket = (flightTicket: FlightTicket) => {
-  console.log({ flightTicket });
   const { id } = flightTicket;
 
-  flightTicket.passengers = parseInt(`${flightTicket.passengers}`);
-  flightTicket.userId = parseInt(`${flightTicket.userId}`);
-  flightTicket.flightId = parseInt(`${flightTicket.flightId}`);
-  flightTicket.flightClassId = parseInt(`${flightTicket.flightClassId}`);
+  if (isNaN(flightTicket.passengers)) {
+    flightTicket.passengers = 0;
+  }
+  if (isNaN(flightTicket.userId)) {
+    flightTicket.userId = 0;
+  }
+  if (isNaN(flightTicket.flightId)) {
+    flightTicket.flightId = 0;
+  }
+  if (isNaN(flightTicket.flightClassId)) {
+    flightTicket.flightClassId = 0;
+  }
 
   return axios
     .put<FlightTicket>(`${BASE_FLIGHT_TICKET_URL}/${id}`, flightTicket)

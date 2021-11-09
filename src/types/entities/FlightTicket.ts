@@ -1,7 +1,7 @@
 export interface FlightTicket {
   id?: number;
-  passengers: any;
-  userId?: any;
-  flightId: any;
-  flightClassId: any;
+  passengers: number;
+  userId?: number;
+  flightId: number;
+  flightClassId: number;
 }
