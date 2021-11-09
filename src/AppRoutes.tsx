@@ -1,6 +1,5 @@
-import { Login } from 'auth/Login';
-import { Register } from 'auth/Register';
-import React from 'react';
+import { Login } from 'auth/login/Login';
+import { Register } from 'auth/register/Register';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Sites } from 'sites/Sites';
 import { Home } from '_components/home/Home';
