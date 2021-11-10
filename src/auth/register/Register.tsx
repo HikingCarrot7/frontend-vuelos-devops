@@ -76,6 +76,7 @@ export const Register: React.FC<RegisterProps> = () => {
                 <FormLabel>Nombre de usuario</FormLabel>
                 <Input
                   name="username"
+                  aria-label="username"
                   type="text"
                   placeholder="HikingCarrot7"
                   size="lg"
@@ -91,6 +92,7 @@ export const Register: React.FC<RegisterProps> = () => {
                 <FormLabel>Correo electrónico</FormLabel>
                 <Input
                   name="email"
+                  aria-label="email"
                   type="email"
                   placeholder="john.doe@hotmail.com"
                   size="lg"
@@ -106,6 +108,7 @@ export const Register: React.FC<RegisterProps> = () => {
                 <FormLabel>Contraseña</FormLabel>
                 <ToggablePasswordViewInput
                   inputName="password"
+                  aria-label="password"
                   {...{ handleChange, handleBlur }}
                 />
                 <FormErrorMessage>{errors.password}</FormErrorMessage>
@@ -117,6 +120,7 @@ export const Register: React.FC<RegisterProps> = () => {
                 <FormLabel>Confirmar contraseña</FormLabel>
                 <ToggablePasswordViewInput
                   inputName="confirmPassword"
+                  aria-label="confirmPassword"
                   {...{ handleChange, handleBlur }}
                 />
                 <FormErrorMessage>{errors.confirmPassword}</FormErrorMessage>
