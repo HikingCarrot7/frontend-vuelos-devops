@@ -9,6 +9,10 @@ export const Navbar: React.FC<NavbarProps> = () => {
   const { username } = authService.currentUserValue;
   const navigate = useNavigate();
 
+  const goHome = () => {
+    navigate('/home');
+  };
+
   const logout = () => {
     authService.logout();
     navigate('/');
@@ -16,7 +20,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
   return (
     <Flex p="5" borderBottom="1px" borderBottomColor="gray.400" align="center">
-      <Heading as="h2" isTruncated>
+      <Heading as="h2" cursor="pointer" isTruncated onClick={goHome}>
         {username}
       </Heading>
       <Spacer />

@@ -4,15 +4,20 @@ import { FlightTicket } from 'types/entities/FlightTicket';
 import { CrudTable } from '_components/crud_table';
 import { FloatingButton } from '_components/forms/FloatingButton';
 import { Navbar } from '_components/Navbar';
-import { useFlightTicketService } from '_services/flightTicket.service';
+import { useFlightTicketService } from '_services/flight_ticket.service';
 import { CreateFlightTicketModal } from './CreateFlightTicketModal';
 
-export interface FlightTicketsProps { }
+export interface FlightTicketsProps {}
 
 export const FlightTickets = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [flightTickets, setFlightTickets] = useState([]);
-  const { getUserFlightTickets, createFlightTicket, deleteFlightTicket, updateFlightTicket } = useFlightTicketService();
+  const {
+    getUserFlightTickets,
+    createFlightTicket,
+    deleteFlightTicket,
+    updateFlightTicket,
+  } = useFlightTicketService();
 
   useEffect(() => {
     getUserFlightTickets().then((flightTickets) => {
@@ -23,7 +28,11 @@ export const FlightTickets = () => {
   const handleCreateFlightTicket = (flightTicket: FlightTicket) => {
     return createFlightTicket(flightTicket)
       .then((flightTicket) => {
-        setFlightTickets((prevFlightTickets) => [...prevFlightTickets, flightTicket]);
+        setFlightTickets((prevFlightTickets) => [
+          ...prevFlightTickets,
+          flightTicket,
+        ]);
+
         return flightTicket;
       })
       .catch((err) => {
@@ -66,7 +75,9 @@ export const FlightTickets = () => {
           handleDelete,
         }}
       />
-      <CreateFlightTicketModal {...{ isOpen, onClose, handleCreateFlightTicket }} />
+      <CreateFlightTicketModal
+        {...{ isOpen, onClose, handleCreateFlightTicket }}
+      />
       <FloatingButton onClick={onOpen} />
     </>
   );
