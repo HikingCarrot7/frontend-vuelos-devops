@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { FlightTicket } from 'types/entities/FlightTicket';
+import { BASE_API_URL } from 'utils/getBaseApiUrl';
 
-const BASE_USER_FLIGHT_TICKETS_URL = `${process.env.REACT_APP_BASE_API_URL}/users/me/flight-tickets`;
-const BASE_FLIGHT_TICKET_URL = `${process.env.REACT_APP_BASE_API_URL}/flight-ticket`;
+const BASE_USER_FLIGHT_TICKETS_URL = `${BASE_API_URL}/users/me/flight-tickets`;
+const BASE_FLIGHT_TICKET_URL = `${BASE_API_URL}/flight-ticket`;
 
 const getUserFlightTickets = (): Promise<FlightTicket[]> => {
   return axios
