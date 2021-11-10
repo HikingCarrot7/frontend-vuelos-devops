@@ -1,5 +1,6 @@
 import { extendTheme } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
+import { Input } from './components/Input';
 
 const theme = {
   styles: {
@@ -14,21 +15,7 @@ const theme = {
     }),
   },
   components: {
-    Input: {
-      variants: {
-        outline: {
-          field: {
-            borderColor: 'gray.400',
-          },
-        },
-        'light-outline': {
-          field: {
-            bgColor: 'gray.100',
-            border: '1px solid',
-          },
-        },
-      },
-    },
+    Input,
   },
 };
 

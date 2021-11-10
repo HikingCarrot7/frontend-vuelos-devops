@@ -1,57 +1,57 @@
-import { Button } from '@chakra-ui/button';
 import {
+  Box,
+  Button,
   FormControl,
   FormErrorMessage,
   FormLabel,
-} from '@chakra-ui/form-control';
-import { Input } from '@chakra-ui/input';
-import { Box, Heading, Link } from '@chakra-ui/layout';
-import { VStack } from '@chakra-ui/react';
+  Heading,
+  Input,
+  Link,
+  VStack,
+} from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { ToggablePasswordViewInput } from '_components/forms/ToggablePasswordViewInput';
 import { usePrevLocation } from '_hooks/usePrevLocation';
-import { authService } from '../_services/auth.service';
+import { authService } from '../../_services/auth.service';
+import { loginValidationSchema } from '../login/Login';
 
-export interface LoginProps {}
+export interface RegisterProps {}
 
-export const loginValidationSchema = yup.object().shape({
-  email: yup.string().email('Inserte un correo válido.'),
-  password: yup
+const registerValidationSchema = loginValidationSchema.shape({
+  username: yup
     .string()
-    .min(8, 'La contraseña debe tener un mínimo de 8 caracteres.')
-    .max(16, 'La contraseña debe tener un máximo de 16 caracteres.')
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/,
-      'La constraseña debe tener al menos 8 caracteres, 1 letra mayúscula, 1 letra minúscula y 1 número.'
-    ),
+    .min(5, 'Se necesita un nombre de usuario con al menos 5 caracteres.')
+    .max(35, 'El nombre de usuario es de un máximo de 35 caracteres.'),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Las contraseñas no son iguales.'),
 });
 
-export const Login: React.FC<LoginProps> = () => {
+export const Register: React.FC<RegisterProps> = () => {
   const navigate = useNavigate();
   const { from } = usePrevLocation();
 
-  useEffect(() => {
-    if (authService.currentUserValue) {
-      navigate('/');
-    }
-  }, [navigate]);
-
   return (
     <Box w="80%" maxW="450px" margin="auto">
-      <Heading py="5">Login</Heading>
+      <Heading py="5">Registrarse</Heading>
       <Formik
-        initialValues={{ email: '', password: '' }}
-        validationSchema={loginValidationSchema}
+        initialValues={{
+          username: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+        }}
+        validationSchema={registerValidationSchema}
         onSubmit={(values, { setSubmitting }) => {
           authService
-            .login(values.email, values.password)
+            .register(values.username, values.email, values.password)
             .then(() => {
               navigate(from);
             })
-            .catch((err: any) => {
+            .catch((err) => {
               window.alert(err);
             })
             .finally(() => {
@@ -71,11 +71,28 @@ export const Login: React.FC<LoginProps> = () => {
             <VStack spacing="6">
               <FormControl
                 isRequired
+                isInvalid={!!errors.username && touched.username}
+              >
+                <FormLabel>Nombre de usuario</FormLabel>
+                <Input
+                  name="username"
+                  aria-label="username"
+                  type="text"
+                  placeholder="HikingCarrot7"
+                  size="lg"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                <FormErrorMessage>{errors.username}</FormErrorMessage>
+              </FormControl>
+              <FormControl
+                isRequired
                 isInvalid={!!errors.email && touched.email}
               >
                 <FormLabel>Correo electrónico</FormLabel>
                 <Input
                   name="email"
+                  aria-label="email"
                   type="email"
                   placeholder="john.doe@hotmail.com"
                   size="lg"
@@ -91,9 +108,22 @@ export const Login: React.FC<LoginProps> = () => {
                 <FormLabel>Contraseña</FormLabel>
                 <ToggablePasswordViewInput
                   inputName="password"
+                  aria-label="password"
                   {...{ handleChange, handleBlur }}
                 />
                 <FormErrorMessage>{errors.password}</FormErrorMessage>
+              </FormControl>
+              <FormControl
+                isRequired
+                isInvalid={!!errors.confirmPassword && touched.confirmPassword}
+              >
+                <FormLabel>Confirmar contraseña</FormLabel>
+                <ToggablePasswordViewInput
+                  inputName="confirmPassword"
+                  aria-label="confirmPassword"
+                  {...{ handleChange, handleBlur }}
+                />
+                <FormErrorMessage>{errors.confirmPassword}</FormErrorMessage>
               </FormControl>
             </VStack>
             <Button
@@ -104,15 +134,15 @@ export const Login: React.FC<LoginProps> = () => {
               disabled={isSubmitting}
               my={4}
             >
-              Iniciar sesión
+              Crear cuenta
             </Button>
             <Link
               as={RouterLink}
-              to={{ pathname: '/register' }}
+              to={{ pathname: '/login' }}
               state={{ from }}
               color="teal.500"
             >
-              ¿Nuevo? Crear una cuenta
+              ¿Ya tienes una cuenta? Iniciar sesión
             </Link>
           </Form>
         )}
