@@ -47,9 +47,8 @@ const flightTicketValidationSchema = yup.object().shape({
   passengers: yup
     .number()
     .typeError('La cantidad de pasajeros debe ser un número válido')
-    .positive(
-      'La cantidad de pasajeros debe ser mayor a 0 y menor o igual a 30.'
-    ),
+    .positive('La cantidad de pasajeros debe ser mayor a 0.')
+    .max(30, 'Se aceptan hasta 30 pasajeros por ticket.'),
 });
 
 export const CreateFlightTicketModal: React.FC<CreateFlightTicketModalProps> =
@@ -114,12 +113,13 @@ export const CreateFlightTicketModal: React.FC<CreateFlightTicketModalProps> =
                         />
                         <Input
                           ref={initialRef}
+                          aria-label="flightId"
                           name="flightId"
                           placeholder="1"
+                          isRequired
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.flightId}
-                          isRequired
                         />
                       </InputGroup>
                       <FormErrorMessage>{errors.flightId}</FormErrorMessage>
@@ -138,12 +138,13 @@ export const CreateFlightTicketModal: React.FC<CreateFlightTicketModalProps> =
                           }
                         />
                         <Input
+                          aria-label="flightClassId"
                           name="flightClassId"
                           placeholder="1"
+                          isRequired
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.flightClassId}
-                          isRequired
                         />
                       </InputGroup>
                       <FormErrorMessage>
@@ -160,12 +161,13 @@ export const CreateFlightTicketModal: React.FC<CreateFlightTicketModalProps> =
                           children={<Icon as={FiUsers} color="gray.300" />}
                         />
                         <Input
+                          aria-label="passengers"
                           name="passengers"
                           placeholder="1"
+                          isRequired
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.passengers}
-                          isRequired
                         />
                       </InputGroup>
                       <FormErrorMessage>{errors.passengers}</FormErrorMessage>
@@ -177,6 +179,7 @@ export const CreateFlightTicketModal: React.FC<CreateFlightTicketModalProps> =
                     <Button
                       colorScheme="teal"
                       type="submit"
+                      aria-label="create-flight-ticket"
                       disabled={isSubmitting}
                     >
                       Crear ticket de vuelo

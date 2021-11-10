@@ -5,7 +5,7 @@ import { CrudTable } from '_components/crud_table';
 import { FloatingButton } from '_components/forms/FloatingButton';
 import { Navbar } from '_components/Navbar';
 import { useFlightTicketService } from '_services/flight_ticket.service';
-import { CreateFlightTicketModal } from './CreateFlightTicketModal';
+import { CreateFlightTicketModal } from './create_flight/CreateFlightTicketModal';
 
 export interface FlightTicketsProps {}
 

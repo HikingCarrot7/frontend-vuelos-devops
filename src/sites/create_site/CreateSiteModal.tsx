@@ -39,7 +39,7 @@ const siteValidationSchema = yup.object().shape({
     .positive('El identificador debe ser mayor a 0.'),
   state: yup
     .string()
-    .min(3, 'Se requiere un mínimo de 3 caracteers para el estado.')
+    .min(3, 'Se requiere un mínimo de 3 caracteres para el estado.')
     .max(50, 'El estado es de un máximo de 50 caracteres.'),
   city: yup
     .string()
@@ -98,6 +98,7 @@ export const CreateSiteModal: React.FC<CreateSiteModalProps> = ({
           <Form onSubmit={handleSubmit}>
             <ModalContent>
               <ModalHeader>Crear un nuevo sitio</ModalHeader>
+
               <ModalCloseButton />
               <ModalBody>
                 <VStack spacing="5">
@@ -110,6 +111,7 @@ export const CreateSiteModal: React.FC<CreateSiteModalProps> = ({
                       />
                       <Input
                         name="country"
+                        aria-label="country"
                         placeholder="México"
                         isRequired
                         ref={initialRef}
@@ -129,6 +131,7 @@ export const CreateSiteModal: React.FC<CreateSiteModalProps> = ({
                       />
                       <Input
                         name="state"
+                        aria-label="state"
                         placeholder="Yucatán"
                         isRequired
                         onChange={handleChange}
@@ -147,6 +150,7 @@ export const CreateSiteModal: React.FC<CreateSiteModalProps> = ({
                       />
                       <Input
                         name="city"
+                        aria-label="city"
                         placeholder="Mérida"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -162,6 +166,7 @@ export const CreateSiteModal: React.FC<CreateSiteModalProps> = ({
                   <Button
                     colorScheme="teal"
                     type="submit"
+                    aria-label="create-site"
                     disabled={isSubmitting}
                   >
                     Crear sitio
