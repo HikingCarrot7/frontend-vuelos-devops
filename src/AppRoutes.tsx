@@ -1,3 +1,4 @@
+import { FlightTickets } from 'flight_tickets/FlightTickets';
 import { Login } from 'auth/login/Login';
 import { Register } from 'auth/register/Register';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
@@ -25,6 +26,14 @@ export const AppRoutes = () => {
           element={
             <PrivateRoute>
               <Sites />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tickets"
+          element={
+            <PrivateRoute>
+              <FlightTickets />
             </PrivateRoute>
           }
         />

@@ -1,6 +1,6 @@
 import { Button } from '@chakra-ui/button';
 import { Input } from '@chakra-ui/input';
-import { Box, HStack, Text } from '@chakra-ui/layout';
+import { Box, Center, Heading, HStack, Text } from '@chakra-ui/layout';
 import { Select } from '@chakra-ui/select';
 import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/table';
 import { usePagination, useTable } from 'react-table';
@@ -32,6 +32,14 @@ export const DataTable = ({ columns, data, updateData, skipPageReset }) => {
     },
     usePagination
   );
+
+  if (data.length === 0) {
+    return (
+      <Center mt="5">
+        <Heading as="h3">No hay ningún elemento</Heading>
+      </Center>
+    );
+  }
 
   return (
     <Box my="4" mx="auto" maxW="900px">
