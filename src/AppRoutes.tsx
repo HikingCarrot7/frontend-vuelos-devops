@@ -4,6 +4,7 @@ import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Sites } from 'sites/Sites';
 import { FlightTickets } from 'flightTickets/FlightTickets';
+import { Flights } from 'flights/Flights';
 import { Home } from '_components/home/Home';
 import { PrivateRoute } from '_components/utils/PrivateRoute';
 
@@ -27,6 +28,14 @@ export const AppRoutes = () => {
           element={
             <PrivateRoute>
               <Sites />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/flights"
+          element={
+            <PrivateRoute>
+              <Flights />
             </PrivateRoute>
           }
         />
