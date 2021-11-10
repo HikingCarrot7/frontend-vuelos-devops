@@ -10,7 +10,7 @@ export interface ToggablePasswordViewInputProps {
 }
 
 export const ToggablePasswordViewInput: React.FC<ToggablePasswordViewInputProps> =
-  ({ inputName, handleChange, handleBlur }) => {
+  ({ inputName, handleChange, handleBlur, ...rest }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
@@ -22,9 +22,11 @@ export const ToggablePasswordViewInput: React.FC<ToggablePasswordViewInputProps>
           size="lg"
           onChange={handleChange}
           onBlur={handleBlur}
+          {...rest}
         />
         <InputRightElement width="3rem">
           <Button
+            aria-label="toggle-password-visibility"
             h="1.5rem"
             size="sm"
             onClick={() => setShowPassword(!showPassword)}

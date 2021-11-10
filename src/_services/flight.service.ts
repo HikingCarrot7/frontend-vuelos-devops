@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { Flight } from 'types/entities/Flight';
+import { BASE_API_URL } from 'utils/getBaseApiUrl';
 
-const BASE_FLIGHT_URL = `${process.env.REACT_APP_BASE_API_URL}/flights`;
+const BASE_FLIGHT_URL = `${BASE_API_URL}/flights`;
 
 const getAllFlights = (): Promise<Flight[]> => {
   return axios.get<Flight[]>(BASE_FLIGHT_URL).then(({ data: flights }) => {
@@ -18,9 +19,9 @@ const createFlight = (flight: Flight): Promise<Flight> => {
 const updateFlight = (flight: Flight) => {
   const { id } = flight;
 
-  flight.estimatedHours = parseInt(`${flight.estimatedHours}`);
   flight.takeOffSiteId = parseInt(`${flight.takeOffSiteId}`);
   flight.landingSiteId = parseInt(`${flight.landingSiteId}`);
+  flight.estimatedHours = parseInt(`${flight.estimatedHours}`);
 
   return axios
     .put<Flight>(`${BASE_FLIGHT_URL}/${id}`, flight)

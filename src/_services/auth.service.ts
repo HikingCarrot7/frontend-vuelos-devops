@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BehaviorSubject } from 'rxjs';
+import { BASE_API_URL } from 'utils/getBaseApiUrl';
 
 const currentUserSubject = new BehaviorSubject(
   JSON.parse(localStorage.getItem('currentUser') || '""')
@@ -7,7 +8,7 @@ const currentUserSubject = new BehaviorSubject(
 
 const login = (email: string, password: string) => {
   return axios
-    .post(`${process.env.REACT_APP_BASE_API_URL}/login`, {
+    .post(`${BASE_API_URL}/login`, {
       email,
       password,
     })
@@ -21,18 +22,15 @@ const login = (email: string, password: string) => {
 
 const register = (username: string, email: string, password: string) => {
   return axios
-    .post(`${process.env.REACT_APP_BASE_API_URL}/register`, {
+    .post(`${BASE_API_URL}/register`, {
       username,
       email,
       password,
     })
     .then((response) => {
-      const { id, username, token } = response.data;
+      const { username, token } = response.data;
 
-      localStorage.setItem(
-        'currentUser',
-        JSON.stringify({ id, username, token })
-      );
+      localStorage.setItem('currentUser', JSON.stringify({ username, token }));
       currentUserSubject.next({ username, token });
 
       return response;

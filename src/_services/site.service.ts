@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { Site } from 'types/entities/Site';
+import { BASE_API_URL } from 'utils/getBaseApiUrl';
 
-const BASE_SITE_URL = `${process.env.REACT_APP_BASE_API_URL}/sites`;
+const BASE_SITE_URL = `${BASE_API_URL}/sites`;
 
 const getAllSites = (): Promise<Site[]> => {
   return axios.get<Site[]>(BASE_SITE_URL).then(({ data: sites }) => {

@@ -1,10 +1,9 @@
-import { Login } from 'auth/Login';
-import { Register } from 'auth/Register';
-import React from 'react';
+import { Login } from 'auth/login/Login';
+import { Register } from 'auth/register/Register';
+import { Flights } from 'flights/Flights';
+import { FlightTickets } from 'flight_tickets/FlightTickets';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Sites } from 'sites/Sites';
-import { FlightTickets } from 'flightTickets/FlightTickets';
-import { Flights } from 'flights/Flights';
 import { Home } from '_components/home/Home';
 import { PrivateRoute } from '_components/utils/PrivateRoute';
 

@@ -4,11 +4,12 @@ import { BsFillTrashFill } from 'react-icons/bs';
 
 const DeleteColumn = ({ tableProps, data, setData }) => {
   const handleOnClick = () => {
-    const dataCopy = [...data];
+    const newData = [...data];
     const dataToDelete = data[tableProps.row.index];
 
-    dataCopy.splice(tableProps.row.index, 1);
-    setData(dataCopy, dataToDelete, tableProps.row.index);
+    newData.splice(tableProps.row.index, 1);
+
+    setData(newData, dataToDelete, tableProps.row.index);
   };
 
   return (

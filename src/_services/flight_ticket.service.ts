@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { FlightTicket } from 'types/entities/FlightTicket';
-import { authService } from '../_services/auth.service';
+import { BASE_API_URL } from 'utils/getBaseApiUrl';
 
-const BASE_USER_FLIGHT_TICKETS_URL = `${process.env.REACT_APP_BASE_API_URL}/users/${authService.currentUserValue.id}/flight-tickets`;
-const BASE_FLIGHT_TICKET_URL = `${process.env.REACT_APP_BASE_API_URL}/flight-ticket`;
+const BASE_USER_FLIGHT_TICKETS_URL = `${BASE_API_URL}/users/me/flight-tickets`;
+const BASE_FLIGHT_TICKET_URL = `${BASE_API_URL}/flight-ticket`;
 
 const getUserFlightTickets = (): Promise<FlightTicket[]> => {
   return axios
@@ -24,18 +24,9 @@ const createFlightTicket = (
 const updateFlightTicket = (flightTicket: FlightTicket) => {
   const { id } = flightTicket;
 
-  if (isNaN(flightTicket.passengers)) {
-    flightTicket.passengers = 0;
-  }
-  if (isNaN(flightTicket.userId)) {
-    flightTicket.userId = 0;
-  }
-  if (isNaN(flightTicket.flightId)) {
-    flightTicket.flightId = 0;
-  }
-  if (isNaN(flightTicket.flightClassId)) {
-    flightTicket.flightClassId = 0;
-  }
+  flightTicket.flightId = parseInt(`${flightTicket.flightId}`);
+  flightTicket.flightClassId = parseInt(`${flightTicket.flightClassId}`);
+  flightTicket.passengers = parseInt(`${flightTicket.passengers}`);
 
   return axios
     .put<FlightTicket>(`${BASE_FLIGHT_TICKET_URL}/${id}`, flightTicket)
@@ -52,7 +43,6 @@ const deleteFlightTicket = (flightTicketId) => {
 const arrange = (flightTicket: any) => {
   return {
     id: flightTicket.id,
-    userId: authService.currentUserValue.id,
     flightId: flightTicket.flight.id,
     flightClassId: flightTicket.flightClass.id,
     passengers: flightTicket.passengers,
