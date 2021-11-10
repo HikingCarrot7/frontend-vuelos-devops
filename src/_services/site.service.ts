@@ -26,7 +26,7 @@ const updateSite = (site: Site) => {
     .then(({ data: site }) => arrange(site));
 };
 
-const deleteSite = (siteId) => {
+const deleteSite = (siteId: number) => {
   return axios
     .delete<Site>(`${BASE_SITE_URL}/${siteId}`)
     .then(({ data: site }) => arrange(site));
