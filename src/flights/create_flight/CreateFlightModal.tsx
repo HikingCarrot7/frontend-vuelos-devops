@@ -37,8 +37,7 @@ const flightValidationSchema = yup.object().shape({
     .number()
     .min(0, 'Se requiere un mínimo de 0 horas')
     .max(100, 'Se requiere un máximo de 100 horas')
-    .typeError('El identificador debe ser un número válido')
-    .positive('El identificador debe ser mayor a 0.'),
+    .typeError('Las horas estimadas deben ser un número válido'),
   takeOffSiteId: yup
     .number()
     .typeError('El identificador debe ser un número válido')
@@ -121,6 +120,7 @@ export const CreateFlightModal: React.FC<CreateFlightModalProps> = ({
                         children={<Icon as={GiMexico} color="gray.300" />}
                       />
                       <Input
+                        aria-label="estimatedHours"
                         name="estimatedHours"
                         placeholder="0"
                         isRequired
@@ -140,6 +140,7 @@ export const CreateFlightModal: React.FC<CreateFlightModalProps> = ({
                         children={<Icon as={GiFrance} color="gray.300" />}
                       />
                       <Input
+                        aria-label="takeOffSiteId"
                         name="takeOffSiteId"
                         placeholder="1"
                         isRequired
@@ -158,6 +159,7 @@ export const CreateFlightModal: React.FC<CreateFlightModalProps> = ({
                         children={<Icon as={FaCity} color="gray.300" />}
                       />
                       <Input
+                        aria-label="landingSiteId"
                         name="landingSiteId"
                         placeholder="2"
                         isRequired
@@ -176,6 +178,7 @@ export const CreateFlightModal: React.FC<CreateFlightModalProps> = ({
                         children={<Icon as={FaCity} color="gray.300" />}
                       />
                       <Input
+                        aria-label="date"
                         name="date"
                         placeholder="YYYY-MM-DD"
                         isRequired
@@ -194,6 +197,7 @@ export const CreateFlightModal: React.FC<CreateFlightModalProps> = ({
                         children={<Icon as={FaCity} color="gray.300" />}
                       />
                       <Input
+                        aria-label="hour"
                         name="hour"
                         placeholder="HH:MM"
                         isRequired
@@ -211,6 +215,7 @@ export const CreateFlightModal: React.FC<CreateFlightModalProps> = ({
                   <Button
                     colorScheme="teal"
                     type="submit"
+                    aria-label="create-flight"
                     disabled={isSubmitting}
                   >
                     Crear vuelo
