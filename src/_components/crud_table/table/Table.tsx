@@ -42,7 +42,7 @@ export const DataTable = ({ columns, data, updateData, skipPageReset }) => {
   }
 
   return (
-    <Box my="4" mx="auto" maxW="900px">
+    <Box my="4" mx="auto" maxW={{ base: '900px', xl: '1200px' }}>
       <Table {...getTableProps()} size={{ base: 'sm' }}>
         <Thead>
           {headerGroups.map((headerGroup) => (
