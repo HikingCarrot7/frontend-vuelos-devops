@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Site } from 'types/entities/Site';
 import { CrudTable } from '_components/crud_table';
 import { FloatingButton } from '_components/forms/FloatingButton';
-import { Navbar } from '_components/Navbar';
+import { Navbar } from '_components/shared/Navbar';
 import { useSiteService } from '_services/site.service';
 import { CreateSiteModal } from './create_site/CreateSiteModal';
 
@@ -42,10 +42,6 @@ export const Sites = () => {
   };
 
   const handleDelete = (updatedData, deletedData) => {
-    if (!window.confirm('¿Estás seguro que quiere eliminar esta entrada?')) {
-      return Promise.resolve(false);
-    }
-
     const { id } = deletedData;
 
     return deleteSite(id)
@@ -62,6 +58,7 @@ export const Sites = () => {
       <CrudTable
         {...{
           populateWith: sites,
+          onUpdateDataState: setSites,
           handleUpdate,
           handleDelete,
         }}

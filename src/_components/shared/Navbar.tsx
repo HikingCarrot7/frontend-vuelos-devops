@@ -1,7 +1,7 @@
 import { Button, Flex, Heading, Spacer } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router';
-import { authService } from '../_services/auth.service';
+import { authService } from '../../_services/auth.service';
 
 export interface NavbarProps {}
 

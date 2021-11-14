@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/layout';
 import { MdAirplaneTicket, MdOutlineFlight, MdPlace } from 'react-icons/md';
-import { Navbar } from '../Navbar';
+import { Navbar } from '../shared/Navbar';
 import { EntityCard } from './EntityCard';
 
 export const Home = () => {

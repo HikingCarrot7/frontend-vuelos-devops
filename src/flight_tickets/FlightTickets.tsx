@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { FlightTicket } from 'types/entities/FlightTicket';
 import { CrudTable } from '_components/crud_table';
 import { FloatingButton } from '_components/forms/FloatingButton';
-import { Navbar } from '_components/Navbar';
+import { Navbar } from '_components/shared/Navbar';
 import { useFlightTicketService } from '_services/flight_ticket.service';
 import { CreateFlightTicketModal } from './create_flight/CreateFlightTicketModal';
 
@@ -51,10 +51,6 @@ export const FlightTickets = () => {
   };
 
   const handleDelete = (updatedData, deletedData) => {
-    if (!window.confirm('¿Estás seguro que quiere eliminar esta entrada?')) {
-      return Promise.resolve(false);
-    }
-
     const { id } = deletedData;
 
     return deleteFlightTicket(id)
@@ -71,6 +67,7 @@ export const FlightTickets = () => {
       <CrudTable
         {...{
           populateWith: flightTickets,
+          onUpdateDataState: setFlightTickets,
           handleUpdate,
           handleDelete,
         }}
