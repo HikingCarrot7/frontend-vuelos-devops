@@ -3,16 +3,17 @@ import { useEffect, useState } from 'react';
 import { Flight } from 'types/entities/Flight';
 import { CrudTable } from '_components/crud_table';
 import { FloatingButton } from '_components/forms/FloatingButton';
-import { Navbar } from '_components/Navbar';
+import { Navbar } from '_components/shared/Navbar';
 import { useFlightService } from '_services/flight.service';
 import { CreateFlightModal } from './create_flight/CreateFlightModal';
 
-export interface FlightsProps { }
+export interface FlightsProps {}
 
 export const Flights = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [flights, setFlights] = useState([]);
-  const { getAllFlights, createFlight, deleteFlight, updateFlight } = useFlightService();
+  const { getAllFlights, createFlight, deleteFlight, updateFlight } =
+    useFlightService();
 
   useEffect(() => {
     getAllFlights().then((flights) => {
@@ -42,10 +43,6 @@ export const Flights = () => {
   };
 
   const handleDelete = (updatedData, deletedData) => {
-    if (!window.confirm('¿Estás seguro que quiere eliminar esta entrada?')) {
-      return Promise.resolve(false);
-    }
-
     const { id } = deletedData;
 
     return deleteFlight(id)
@@ -62,6 +59,7 @@ export const Flights = () => {
       <CrudTable
         {...{
           populateWith: flights,
+          onUpdateDataState: setFlights,
           handleUpdate,
           handleDelete,
         }}

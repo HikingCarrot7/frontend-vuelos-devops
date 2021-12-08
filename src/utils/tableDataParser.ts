@@ -1,11 +1,10 @@
 import { createDeleteColumn } from '../_components/crud_table/table/DeleteColumn';
 
-export const parseData = (data: Array<any>, setData) => {
-  const columns = createColumns(data, setData);
-  return columns;
+export const parseData = (data: any[], deleteRowCallback) => {
+  return createColumns(data, deleteRowCallback);
 };
 
-const createColumns = (data: Array<any>, setData) => {
+const createColumns = (data: any[], deleteRowCallback) => {
   const object = data[0];
   const columns = [];
 
@@ -16,16 +15,18 @@ const createColumns = (data: Array<any>, setData) => {
     });
   }
 
-  columns.push(addDeleteColumn(data, setData));
+  columns.push(addDeleteColumn(data, deleteRowCallback));
 
   return columns;
 };
 
-const addDeleteColumn = (data, setData) => {
+const addDeleteColumn = (data, deleteRowCallback) => {
   return {
-    Header: 'Delete',
     id: 'delete',
+    Header: 'Delete',
     accessor: (str) => 'delete',
-    Cell: (tableProps) => createDeleteColumn(tableProps, data, setData),
+    Cell: (tableProps) => {
+      return createDeleteColumn(tableProps, data, deleteRowCallback);
+    },
   };
 };

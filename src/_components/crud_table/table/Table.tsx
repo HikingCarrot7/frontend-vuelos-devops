@@ -6,7 +6,12 @@ import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/table';
 import { usePagination, useTable } from 'react-table';
 import { defaultColumn } from './EditableCell';
 
-export const DataTable = ({ columns, data, updateData, skipPageReset }) => {
+export const DataTable = ({
+  columns,
+  populateWith,
+  updateData,
+  skipPageReset,
+}) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -25,7 +30,7 @@ export const DataTable = ({ columns, data, updateData, skipPageReset }) => {
   } = useTable(
     {
       columns,
-      data,
+      data: populateWith,
       defaultColumn,
       autoResetPage: !skipPageReset,
       updateData,
@@ -33,7 +38,7 @@ export const DataTable = ({ columns, data, updateData, skipPageReset }) => {
     usePagination
   );
 
-  if (data.length === 0) {
+  if (populateWith.length === 0) {
     return (
       <Center mt="5">
         <Heading as="h3">No hay ningún elemento</Heading>
