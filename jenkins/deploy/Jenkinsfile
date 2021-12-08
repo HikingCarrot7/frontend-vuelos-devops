@@ -4,25 +4,34 @@ pipeline {
 
     stages {
 
-        stage('Deploy') {
-            
+        stage("Recover artifacts from build pipeline") {
             steps {
-                sh "docker build -t front-vuelos-" + env.GIT_BRANCH + ":1.0.0-" + env.BUILD_NUMBER + " ."
-                sh "docker ps | grep front-vuelos-" + env.GIT_BRANCH + " | awk '{print \$1}' | xargs -r docker stop &>/dev/null"
-
-                script {
-
-                    if(isUnix()) {
-                        sh "docker run -d --network=host front-vuelos-" + env.GIT_BRANCH + ":1.0.0-" + env.BUILD_NUMBER
-                    } else {
-                        sh "docker run -d -p 8000:80 front-vuelos-" + env.GIT_BRANCH + ":1.0.0-" + env.BUILD_NUMBER
-                    }
-
-                }
-
-
-                echo 'App deployed!'
+                copyArtifacts(
+                    projectName: "front-vuelos-build",
+                    selector: upstream(),
+                    filter: "build/**"
+                )
             }
         }
+
+        stage('Copy nginx config to VM') {
+             steps {
+                sshPublisher(
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: 'hiking',
+                            transfers: [
+                                sshTransfer(
+                                    execCommand: 'cp -r nginx/ /etc/nginx',
+                                )
+                            ]
+                        )
+                    ]
+                )
+            }
+        }
+
+        
+
     }
 }

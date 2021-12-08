@@ -1,5 +1,7 @@
 pipeline {
+
     agent any
+    
     stages {
         stage('Install dependencies') {
             steps {
@@ -22,6 +24,7 @@ pipeline {
     
     post {
         success {
+            archiveArtifacts artifacts: "build/**", fingerprint: true
             echo "Build pipeline completed!"
             build job: "front-vuelos-deploy"
         }
