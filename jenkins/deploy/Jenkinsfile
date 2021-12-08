@@ -24,8 +24,8 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles: 'nginx/**',
                                     removePrefix: 'nginx', 
-                                    remoteDirectory: 'nginx_config/'
-                                    execCommand: 'home/hikingcarrot7/utils/copy_nginx_config',
+                                    remoteDirectory: 'nginx_config/',
+                                    execCommand: 'home/hikingcarrot7/utils/copy_nginx_config'
                                 )
                             ]
                         )
