@@ -25,7 +25,7 @@ pipeline {
                                     sourceFiles: 'nginx/**',
                                     removePrefix: 'nginx',
                                     remoteDirectory: 'nginx_config',
-                                    execCommand: 'cp nginx_config/* /etc/nginx/',
+                                    execCommand: 'cp nginx_config/* /etc/nginx/; systemctl restart nginx',
                                 )
                             ]
                         )
@@ -53,7 +53,27 @@ pipeline {
                 )
             }
         }
-
+        
+        stage('Start ngrok') {
+             steps {
+                sshPublisher(
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: 'server',
+                            transfers: [
+                                sshTransfer(
+                                    execCommand: 'ngrok start --config=ngrok.yml vuelos &',
+                                    remoteDirectory: '',
+                                    removePrefix: 'jenkins/deploy/',
+                                    sourceFiles: 'jenkins/deploy/ngrok.yml',
+                                )
+                            ],
+                            verbose: true
+                        )
+                    ]
+                )
+            }
+        }
 
     }
 }
