@@ -3,7 +3,7 @@ const getBaseApiUrl = () => {
   const TEMPLATE_URL = 'http://*:5000/api/v1';
 
   if (process.env.NODE_ENV !== 'production') {
-    return TEMPLATE_URL.replace('*', '10.0.2.2');
+    return TEMPLATE_URL.replace('*', '192.168.0.2');
   }
 
   if (window.navigator.userAgent.indexOf('Linux') !== -1) {
