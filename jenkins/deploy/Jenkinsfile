@@ -22,7 +22,10 @@ pipeline {
                             configName: 'hiking',
                             transfers: [
                                 sshTransfer(
-                                    execCommand: 'cp -r nginx/ /etc/nginx',
+                                    sourceFiles: 'nginx/**',
+                                    removePrefix: 'nginx', 
+                                    remoteDirectory: 'nginx_config/'
+                                    execCommand: 'home/hikingcarrot7/utils/copy_nginx_config',
                                 )
                             ]
                         )
@@ -31,7 +34,7 @@ pipeline {
             }
         }
 
-        
+
 
     }
 }
