@@ -14,18 +14,18 @@ pipeline {
             }
         }
 
-        stage('Copy nginx config to VM') {
+        stage('Copy nginx config') {
              steps {
                 sshPublisher(
                     publishers: [
                         sshPublisherDesc(
-                            configName: 'hiking',
+                            configName: 'server',
                             transfers: [
                                 sshTransfer(
                                     sourceFiles: 'nginx/**',
-                                    removePrefix: 'nginx', 
-                                    remoteDirectory: 'nginx_config/',
-                                    execCommand: 'home/hikingcarrot7/utils/copy_nginx_config'
+                                    removePrefix: 'nginx',
+                                    remoteDirectory: 'nginx_config',
+                                    execCommand: 'cp nginx_config/* /etc/nginx/',
                                 )
                             ]
                         )
@@ -34,6 +34,25 @@ pipeline {
             }
         }
 
+        stage('Copy build proyect to VM') {
+             steps {
+                sshPublisher(
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: 'server',
+                            transfers: [
+                                sshTransfer(
+                                    sourceFiles: 'build/**',
+                                    removePrefix: 'build',
+                                    remoteDirectory: 'vuelos',
+                                    execCommand: 'rm -r /usr/share/nginx/html/*; mv vuelos/* /usr/share/nginx/html',
+                                )
+                            ]
+                        )
+                    ]
+                )
+            }
+        }
 
 
     }
