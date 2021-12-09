@@ -1,6 +1,6 @@
 // Solución cutre para que también funcione en Windows y pueda pasar a exponer @Shadic
 const getBaseApiUrl = () => {
-  const TEMPLATE_URL = 'http://*/api/v1';
+  const TEMPLATE_URL = 'https://*/api/v1';
 
   if (process.env.NODE_ENV !== 'production') {
     return TEMPLATE_URL.replace('*', 'b92c-189-214-1-166.ngrok.io');
