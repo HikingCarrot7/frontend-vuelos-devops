@@ -62,7 +62,7 @@ pipeline {
                             configName: 'server',
                             transfers: [
                                 sshTransfer(
-                                    execCommand: 'ngrok start --config=ngrok.yml vuelos &',
+                                    execCommand: 'killall ngrok; ngrok start --config=ngrok.yml vuelos &',
                                     remoteDirectory: '',
                                     removePrefix: 'jenkins/deploy/',
                                     sourceFiles: 'jenkins/deploy/ngrok.yml',
