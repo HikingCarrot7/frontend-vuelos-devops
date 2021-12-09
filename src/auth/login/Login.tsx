@@ -15,7 +15,7 @@ import { ToggablePasswordViewInput } from '_components/forms/ToggablePasswordVie
 import { usePrevLocation } from '_hooks/usePrevLocation';
 import { authService } from '../../_services/auth.service';
 
-export interface LoginProps {}
+export interface LoginProps { }
 
 export const loginValidationSchema = yup.object().shape({
   email: yup.string().email('Inserte un correo válido.'),
@@ -114,7 +114,7 @@ export const Login: React.FC<LoginProps> = () => {
               state={{ from }}
               color="teal.500"
             >
-              ¿Nuevo? Crear una cuenta
+              Crear una cuenta
             </Link>
           </Form>
         )}
