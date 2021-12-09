@@ -41,7 +41,7 @@ export const Login: React.FC<LoginProps> = () => {
 
   return (
     <Box w="80%" maxW="450px" margin="auto">
-      <Heading py="5">Login</Heading>
+      <Heading py="5">Entrega final</Heading>
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={loginValidationSchema}
@@ -114,7 +114,7 @@ export const Login: React.FC<LoginProps> = () => {
               state={{ from }}
               color="teal.500"
             >
-              Crear una cuenta
+              ¿Nuevo? Crear una cuenta
             </Link>
           </Form>
         )}
