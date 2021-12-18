@@ -15,7 +15,7 @@ import { ToggablePasswordViewInput } from '_components/forms/ToggablePasswordVie
 import { usePrevLocation } from '_hooks/usePrevLocation';
 import { authService } from '../../_services/auth.service';
 
-export interface LoginProps {}
+export interface LoginProps { }
 
 export const loginValidationSchema = yup.object().shape({
   email: yup.string().email('Inserte un correo válido.'),
@@ -41,7 +41,7 @@ export const Login: React.FC<LoginProps> = () => {
 
   return (
     <Box w="80%" maxW="450px" margin="auto">
-      <Heading py="5">Login</Heading>
+      <Heading py="5">Entrega final</Heading>
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={loginValidationSchema}

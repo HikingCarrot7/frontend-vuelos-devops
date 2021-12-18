@@ -1,0 +1,8 @@
+authtoken: 2214EL7M8SMw4DLKrXgVnX7yhVy_4VHkYaqdWWpauevAMKyK5
+console_ui: false
+log: false
+tunnels:
+  vuelos:
+    proto: http
+    addr: 80
+    host_header: preserve
